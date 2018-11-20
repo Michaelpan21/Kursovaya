@@ -5,7 +5,8 @@
 #include<string>
 #include<locale.h>
 #include<windows.h>
-#define setlocale (LC_ALL,"Russian")
+
+
 
 using namespace std;
 
@@ -20,12 +21,12 @@ class CarConfig{
      string model;
      string tires_label;
      string additions;
+     string engine_capacity;
+     string doors;
+     string trunk;
+     string year;
 
-     float engine_capacity;
-
-     int year;
-     int doors;
-     int trunk;
+     int file_size;
 
  friend class VazBuilder;
 };
@@ -39,9 +40,13 @@ class VazBuilder{
 
  public:
 
+     VazBuilder();
      CarConfig CreateCar();
-
      void CreateFile();
-     void ShowConfig();
+     int  ShowCars();
+     void ShowLastCar();
+     void DeleteOneCar();
+     void DeleteAllCars();
+
 
 };
