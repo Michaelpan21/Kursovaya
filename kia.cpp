@@ -4,62 +4,59 @@
 
 
 
- VazBuilder :: VazBuilder(){
+ KiaBuilder :: KiaBuilder(){
 
  isCreated = false;
 
-   try{ ifstream fpin("vaz.txt", ios_base::in);
+   try{ ifstream fpin("kia.txt", ios_base::in);
       if(!fpin.is_open())  throw 300;
 
-   } catch(int error){ ofstream fpout("vaz.txt");  }
+   } catch(int error){ ofstream fpout("kia.txt");  }
  }
 
 
- void  VazBuilder :: setModel(){
+ void  KiaBuilder :: setModel(){
 
    ColourMenu object;
    int choice;
 
    object.Colour_Green_Light();
-   cout << endl << "      VAZ Configuration... ";
+   cout << endl << "      KIA Configuration... ";
    object.Colour_White();
 
    object.Colour_Green_Light();
    cout << endl << endl << " > Choose Model : ";
    object.Colour_White();
 
-   cout << endl << "                    1) Kalina ";
-   cout << endl << "                    2) Priora ";
-   cout << endl << "                    3) X-ray  ";
-   cout << endl << "                    4) Vesta  ";
+   cout << endl << "                    1) Sportage ";
+   cout << endl << "                    2) Optima ";
+   cout << endl << "                    3) Rio  ";
    cout << endl << "                    "; cin >> choice;
 
       switch(choice){
-                      case 1 : someCar -> model = "Kalina";
-                               someCar -> car_size = "3893mm x 1700mm x 1604mm";
-                               someCar -> trunk = "260";
+                      case 1 : someCar -> model = "Sportage";
+                               someCar -> car_size = "4485mm x 1855mm x 1655mm";
+                               someCar -> trunk = "496";
+                               someCar -> doors = "5";
                                break;
 
-                      case 2 : someCar -> model = "Priora" ;
-                               someCar -> car_size = "4350mm x 1680mm x 1420mm";
-                               someCar -> trunk = "360";
+                      case 2 : someCar -> model = "Optima" ;
+                               someCar -> car_size = "4855mm x 1680mm x 1485mm";
+                               someCar -> trunk = "410";
+                               someCar -> doors = "5";
                                break;
 
-                      case 3 : someCar -> model = "X-ray";
+                      case 3 : someCar -> model = "Rio";
                                someCar -> car_size = "4165mm x 1764mm x 1570mm";
-                               someCar -> trunk = "361";
-                               break;
-
-                      case 4 : someCar -> model = "Vesta";
-                               someCar -> car_size = "4410mm x 1764mm x 1520mm";
-                               someCar -> trunk = "480";
+                               someCar -> trunk = "405";
+                               someCar -> doors = "5";
                                break;
 
                       default : throw 100;   break;
                     }
  }
 
- void  VazBuilder :: setColor(){
+ void  KiaBuilder :: setColor(){
 
    ColourMenu object;
 
@@ -72,7 +69,7 @@
  }
 
 
- void  VazBuilder :: setEngine_type(){
+ void  KiaBuilder :: setEngine_type(){
 
    int choice;
    ColourMenu object;
@@ -93,7 +90,7 @@
  }
 
 
- void  VazBuilder :: setEngine_capacity(){
+ void  KiaBuilder :: setEngine_capacity(){
 
    int choice;
    ColourMenu object;
@@ -102,21 +99,38 @@
    cout << endl << " > Choose Engine's Capacity : ";
    object.Colour_White();
 
-   cout << endl << "                              1) 1.6 ";
-   cout << endl << "                              2) 1.8 ";
-   cout << endl << "                              3) 2.0 ";
-   cout << endl << "                              "; cin >> choice;
+  if(someCar -> model == "Sportage" || someCar -> model == "Optima" )
+   {
+     cout << endl << "                              1) 2.0 ";
+     cout << endl << "                              2) 2.0t ";
+     cout << endl << "                              3) 2.5t ";
+     cout << endl << "                              "; cin >> choice;
 
-      switch(choice){
-                      case 1 : someCar -> engine_capacity = "1.6";    break;
-                      case 2 : someCar -> engine_capacity = "1.8";    break;
-                      case 3 : someCar -> engine_capacity = "2.0";    break;
+       switch(choice){
+                      case 1 : someCar -> engine_capacity = "2.0";    break;
+                      case 2 : someCar -> engine_capacity = "2.0t";   break;
+                      case 3 : someCar -> engine_capacity = "2.5t ";  break;
                       default : throw 100;   break;
-                    }
+                     }
+   }
+   else
+   {
+     cout << endl << "                              1) 1.4 ";
+     cout << endl << "                              2) 1.6 ";
+     cout << endl << "                              3) 1.6t ";
+     cout << endl << "                              "; cin >> choice;
+
+       switch(choice){
+                      case 1 : someCar -> engine_capacity = "1.4";    break;
+                      case 2 : someCar -> engine_capacity = "1.6";    break;
+                      case 3 : someCar -> engine_capacity = "1.6t";     break;
+                      default : throw 100;   break;
+                     }
+   }
  }
 
 
- void  VazBuilder :: setYear(){
+ void  KiaBuilder :: setYear(){
 
    int choice;
    ColourMenu object;
@@ -137,7 +151,7 @@
  }
 
 
- void  VazBuilder :: setTires_label(){
+ void  KiaBuilder :: setTires_label(){
 
    int choice;
    ColourMenu object;
@@ -146,43 +160,59 @@
    cout << endl << " > Choose Tires : ";
    object.Colour_White();
 
-   cout << endl << "                  1) Pirelli 210/30 R16 ";
-   cout << endl << "                  2) Michelin 215/20 R18 ";
-   cout << endl << "                  "; cin >> choice;
+   if(someCar -> model == "Rio")
+   {
+      cout << endl << "                  1) Pirelli 195/50 R15 ";
+      cout << endl << "                  2) Michelin 200/45 R16 ";
+      cout << endl << "                  "; cin >> choice;
+
 
       switch(choice){
-                      case 1 : someCar -> tires_label = "Pirelli 210/30 R16";     break;
-                      case 2 : someCar -> tires_label = "Michelin 215/20 R18";    break;
+                      case 1 : someCar -> tires_label = "Pirelli 195/50 R15";     break;
+                      case 2 : someCar -> tires_label = "Michelin 200/45 R16";    break;
                       default : throw 100;   break;
                     }
+   }
+   else
+   {
+      cout << endl << "                  1) Nokian Nordman SX2 205\55 R16 ";
+      cout << endl << "                  2) Nokian Nordman SX2 215\55 R18 ";
+      cout << endl << "                  2) Cordiant Sport 2 215\55 R18 ";
+      cout << endl << "                  "; cin >> choice;
+
+      switch(choice){
+                      case 1 : someCar -> tires_label = "Nokian Nordman SX2 205\55 R16";     break;
+                      case 2 : someCar -> tires_label = "Nokian Nordman SX2 215\55 R18";     break;
+                      case 3 : someCar -> tires_label = "Cordiant Sport 2 215\55 R18";       break;
+                      default : throw 100;   break;
+                    }
+   }
  }
 
- void  VazBuilder :: setRoofTrunk(){
+ void  KiaBuilder :: setMirrorHitter(){
 
    int choice;
    ColourMenu object;
 
    object.Colour_Green_Light();
-   cout << endl << " > Set Roof Trunk ? : ";
+   cout << endl << " > Set Hit of Back Mirrors ? : ";
    object.Colour_White();
 
-   cout << endl << "                      1) Yes ";
-   cout << endl << "                      2) No ";
-   cout << endl << "                      "; cin >> choice;
+   cout << endl << "                               1) Yes ";
+   cout << endl << "                               2) No ";
+   cout << endl << "                               "; cin >> choice;
 
       switch(choice){
-                      case 1 : someCar -> roof_trunk = "Yes";   break;
-                      case 2 : someCar -> roof_trunk = "No";    break;
+                      case 1 : someCar -> mirror_hitter = "Yes";   break;
+                      case 2 : someCar -> mirror_hitter = "No";    break;
                       default : throw 100;   break;
                     }
  }
 
 
- void  VazBuilder :: setDoors(){
+ void  KiaBuilder :: setDoors(){
 
    ColourMenu object;
-
-   someCar -> doors = "5";
 
    object.Colour_Green_Light();
    cout << endl << endl << " > Doors : ";
@@ -191,7 +221,7 @@
  }
 
 
- void  VazBuilder :: setCar_size(){
+ void  KiaBuilder :: setCar_size(){
 
    ColourMenu object;
 
@@ -202,7 +232,7 @@
  }
 
 
- void  VazBuilder :: setTrunk(){
+ void  KiaBuilder :: setTrunk(){
 
    ColourMenu object;
 
@@ -213,7 +243,8 @@
 
    object.Colour_Purple();
    cout << endl << endl << "-------------------------------------------------------------" << endl;
-   cout << "                    Vaz Config CREARED ! Press '2' to Save it in 'vaz.txt'  " << endl << endl;
+   cout << "                   Kia's Config CREARED ! Press '2' to Save it in 'kia.txt'  " \
+   << endl << endl;
 
    object.Colour_White();
 
@@ -221,14 +252,14 @@
  }
 
 
- void VazBuilder :: addToFile(){
+ void KiaBuilder :: addToFile(){
 
  if(isCreated == false) throw 500;
 
  ColourMenu object;
 
  ofstream fpout;
- fpout.open("vaz.txt", ios_base::app);
+ fpout.open("kia.txt", ios_base::app);
    if(!fpout.is_open())  throw 300;
 
  fpout << "    "<< someCar->model << " " << someCar->color << " " << someCar->engine_capacity  \
@@ -244,25 +275,25 @@
  fpout << " > Quantity of Doors : " << someCar->doors << endl;
  fpout << " > Trunk Capacity : " << someCar->trunk << endl;
  fpout << " > Tires Label : " << someCar->tires_label << endl;
- fpout << " > Roof Trunk : " << someCar->roof_trunk << endl;
+ fpout << " > Mirror Hitter : " << someCar->mirror_hitter << endl;
  fpout << endl;
 
  fpout.close();
 
  object.Colour_Purple();
- cout << endl << "   !  Vaz's Config was Saved in 'vaz.txt  !";
+ cout << endl << "   !  Kia's Config was Saved in 'kia.txt  !";
  object.Colour_White();
  }
 
 
- int VazBuilder :: showCars(){
+ int KiaBuilder :: showCars(){
 
  ColourMenu object;
 
  char file_string[100];
  int file_size = 0;
 
- ifstream fpin("vaz.txt");
+ ifstream fpin("kia.txt");
    if(!fpin.is_open())  throw 300;
 
       for(int i = 0 ;; i++ ){
@@ -286,7 +317,7 @@
  bool check = true;
  int choice;
 
- fpin.open("vaz.txt");
+ fpin.open("kia.txt");
    if(!fpin.is_open())  throw 300;
 
       for(int i = 0 ; i < file_size; i++ ){
@@ -325,7 +356,7 @@
 
  if(choice > file_size / 13) throw 100;
 
- fpin.open("vaz.txt");
+ fpin.open("kia.txt");
    if(!fpin.is_open())  throw 300;
 
       for(int i = 0 ; i < file_size; i++ ){
@@ -357,7 +388,7 @@
 
 
 
- void VazBuilder :: showLastCar(){
+ void KiaBuilder :: showLastCar(){
 
  if(isCreated == false) throw 500;
 
@@ -374,7 +405,7 @@
  cout << " > Quantity of Doors : " << someCar->doors << endl;
  cout << " > Trunk Capacity : " << someCar->trunk << endl;
  cout << " > Tires Label : " << someCar->tires_label << endl;
- cout << " > Roof Trunk : " << someCar->roof_trunk << endl;
+ cout << " > Mirror Hitter : " << someCar->mirror_hitter << endl;
  cout << endl;
 
  }
@@ -383,7 +414,7 @@
 
 
 
- void VazBuilder :: deleteOneCar(){
+ void KiaBuilder :: deleteOneCar(){
 
  if(isCreated == false) throw 500;
 
@@ -394,7 +425,7 @@
 
 
  ifstream fpin;
- fpin.open("vaz.txt");
+ fpin.open("kia.txt");
    if(!fpin.is_open())  throw 300;
 
  ofstream fpaste("copyFile.txt");
@@ -424,7 +455,7 @@
  }
 
  ofstream fpout;
- fpout.open("vaz.txt", ios_base :: trunc);
+ fpout.open("kia.txt", ios_base :: trunc);
    if(!fpout.is_open())  throw 300;
 
  if(choice == 1) file_size = file_size - 14;
@@ -473,14 +504,14 @@
 
 
 
- void VazBuilder :: deleteAllCars(){
+ void KiaBuilder :: deleteAllCars(){
 
  if(isCreated == false) throw 500;
 
  ColourMenu object;
 
  ofstream fpout;
- fpout.open("vaz.txt");
+ fpout.open("kia.txt");
    if(!fpout.is_open())  throw 300;
 
  fpout.clear();
@@ -489,4 +520,3 @@
  cout << endl << "  >  Cars DELETED !";
  object.Colour_White();
 }
-
